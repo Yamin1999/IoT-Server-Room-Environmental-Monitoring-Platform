@@ -1,9 +1,12 @@
 #include "stm32f4xx.h"
 #include <stdio.h>
 #include "gpio.h"
+#include "systick.h"
 
 int main()
 {
+    systick_init();
+
     // Enable GPIOA clock (STM32 specific - adapt to your MCU)
     RCC->AHB1ENR |= (1 << 0);
     
@@ -21,6 +24,6 @@ int main()
     while(1)
     {
         GPIO_TogglePin(GPIOA, 5);
-        for(volatile int i = 0; i < 500000; i++);  // Simple delay
+        delay_ms(500);
     }
 }
